@@ -99,15 +99,7 @@ with app.app_context():
     db.create_all()
 ```
 
-8. Povoar o Banco (Opcional)
-
-Para adicionar dados de exemplo, execute o script de povoamento no Terminal:
-
-```bash
-python seed.py
-```
-
-9. Iniciar a Aplicação
+8. Iniciar a Aplicação
 
 Finalmente, inicie o servidor Flask:
 
