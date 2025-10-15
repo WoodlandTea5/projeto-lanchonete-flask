@@ -1,0 +1,15 @@
+# Ambientes virtuais
+.venv/
+venv/
+ENV/
+
+# Arquivos de ambiente com segredos
+.env
+
+# Pastas de cache do Python
+__pycache__/
+*.pyc
+
+# Pastas do PyCharm e outros editores
+.idea/
+.vscode/

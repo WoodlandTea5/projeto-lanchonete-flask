@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Acesso ao Painel de Controle</h2>
+  <p>Use suas credenciais para gerenciar os produtos.</p>
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div>
+      {{ form.email.label }}<br>
+      {{ form.email(size=30) }}
+      {% for error in form.email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+
+    <div>
+      {{ form.senha.label }}<br>
+      {{ form.senha(size=30) }}
+      {% for error in form.senha.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+  <br>
+  <p>
+    Não tem uma conta?
+    <a href="{{ url_for('web.registro') }}">Crie uma agora</a>.
+  </p>
+{% endblock %}

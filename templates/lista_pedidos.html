@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+    {% block content %}
+      <h2>Histórico de pedidos</h2>
+      {% for pedido in pedidos %}
+        <div style="border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin-bottom: 15px;">
+          <h4>Pedido #{{ pedido.id }}</h4>
+          <p>
+            <strong>Data:</strong> {{ pedido.data_hora.strftime('%d/%m/%Y %H:%M') }}<br>
+            <strong>Status:</strong> {{ pedido.status }}<br>
+            <strong>Registrado por:</strong> {{ pedido.usuario.nome }}
+          </p>
+          <h5>Itens:</h5>
+          <ul>
+            {% for item in pedido.itens %}
+              <li>{{ item.quantidade }}x {{ item.produto.nome }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% else %}
+        <p>Nenhum pedido registrado ainda.</p>
+      {% endfor %}
+    {% endblock %}

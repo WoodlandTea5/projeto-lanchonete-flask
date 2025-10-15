@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>{% if item %}Editar Produto{% else %}Cadastrar Novo Produto{% endif %}</h2>
+
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div>
+      {{ form.nome.label }}<br>
+      {{ form.nome(size=40) }}
+      {% for error in form.nome.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+      {{ form.categoria.label }}<br>
+      {{ form.categoria() }}
+      {% for error in form.categoria.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+      {{ form.preco.label }}<br>
+      {{ form.preco() }}
+      {% for error in form.preco.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+      {{ form.descricao.label }}<br>
+      {{ form.descricao(rows=5, cols=40) }}
+      {% for error in form.descricao.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+      {{ form.imagem.label }}<br>
+      {{ form.imagem() }}
+      {% for error in form.imagem.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+        {{ form.ingredientes.label }}<br>
+        {{ form.ingredientes(size=8, class="form-control") }}
+    </div>
+
+    <br>
+
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+
+  <p>
+    <a href="{{ url_for('web.lista_produtos') }}">Voltar para a lista</a>
+  </p>
+{% endblock %}

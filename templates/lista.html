@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Gerenciamento de Produtos</h2>
+
+  <p>
+    <a href="{{ url_for('web.novo_produto') }}">Cadastrar novo produto</a>
+  </p>
+
+
+  <div class="search-form">
+    <form method="GET" action="{{ url_for('web.lista_produtos') }}">
+      <input type="search" name="q" placeholder="Buscar por nome ou categoria..." value="{{ busca or '' }}">
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+
+
+  <hr>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Imagem</th>
+        <th>Nome do Produto</th>
+        <th>Categoria</th>
+        <th>Preço (R$)</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for produto in itens %}
+      <tr>
+        <td><img src="{{ url_for('static', filename='img/' + produto.imagem) }}" alt="{{ produto.nome }}" width="100"></td>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.categoria }}</td>
+        <td>{{ "%.2f"|format(produto.preco|float) }}</td>
+        <td>
+          <a href="{{ url_for('web.editar_produto', pk=produto.id) }}">Editar</a>
+
+          <form action="{{ url_for('web.excluir_produto', pk=produto.id) }}" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este produto?');">
+              Excluir
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4">Nenhum produto cadastrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

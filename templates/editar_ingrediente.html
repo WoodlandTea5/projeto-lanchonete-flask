@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+      <h2>{% if item %}Editar Ingrediente{% else %}Cadastrar Novo Ingrediente{% endif %}</h2>
+
+      <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div>
+          {{ form.nome.label }}<br>
+          {{ form.nome(size=40) }}
+        </div>
+
+        <div>
+          {{ form.estoque_atual.label }}<br>
+          {{ form.estoque_atual() }}
+        </div>
+
+        <div>
+          {{ form.unidade_medida.label }}<br>
+          {{ form.unidade_medida(size=20) }}
+        </div>
+
+        <br>
+
+        <div>
+          {{ form.submit() }}
+        </div>
+      </form>
+      <br>
+      <p><a href="{{ url_for('web.lista_ingredientes') }}">Voltar para a lista</a></p>
+    {% endblock %}

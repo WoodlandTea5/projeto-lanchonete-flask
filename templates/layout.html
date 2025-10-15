@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Lanchonete - Gerenciamento</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    </head>
+  <body>
+    <header>
+      <h1>Painel de Controle da Lanchonete</h1>
+      <nav>
+        <ul>
+          {% if current_user.is_authenticated %}
+            <li>Olá, {{ current_user.nome }}</li>
+            <li><a href="{{ url_for('web.lista_produtos') }}">Produtos</a></li>
+            <li><a href="{{ url_for('web.lista_ingredientes') }}">Ingredientes</a></li>
+            <li><a href="{{ url_for('web.novo_pedido') }}">Novo Pedido</a></li>
+            <li><a href="{{ url_for('web.lista_pedidos') }}">Ver Pedidos</a></li>
+            <li><a href="{{ url_for('web.logout') }}">Sair (Logout)</a></li>
+          {% else %}
+            <li><a href="{{ url_for('web.login') }}">Login</a></li>
+            <li><a href="{{ url_for('web.registro') }}">Registrar</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flash-messages">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <p>&copy; 2025 - Sistema de Gerenciamento da Lanchonete</p>
+    </footer>
+
+  </body>
+</html>
